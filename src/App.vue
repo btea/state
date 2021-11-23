@@ -7,8 +7,7 @@
 	</div>
 </template>
 <script setup>
-import { ref } from '@vue/composition-api';
-import HelloWorld from './hellloWorld.vue';
+import { ref } from 'vue';
 const input = ref('');
 const add = () => {
 	const v = +input.value;

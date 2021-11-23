@@ -1,9 +1,23 @@
-import { createVuePlugin } from 'vite-plugin-vue2'; // vite匹配vue2插件
-import ScriptSetup from 'vue2-script-setup-transform/vite-plugin'; // vue2使用setup特性
+import createVuePlugin from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+import Components from 'unplugin-vue-components/vite'
 
-export default {
+export default defineConfig({
 	server: {
 		host: true,
 	},
-	plugins: [createVuePlugin(), ScriptSetup()],
-};
+	plugins: [createVuePlugin(), Components({ 
+		dts: true,
+		extensions: ['vue'],
+		include: [/\.vue$/, /\.md$/],
+		globalNamespaces: ['global'],
+		resolvers: [
+			(name) => {
+				if (name === 'HelloWorld') {
+					return './hellloWorld.vue'
+				}
+				console.log(name);
+			}
+		]
+	})],
+})
